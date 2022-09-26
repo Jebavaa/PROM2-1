@@ -1,53 +1,63 @@
-import models.PizzaMenu;
-import models.PizzaMenuItem;
+import dataSaver.DataSaver;
+import dataSaver.FileDataSaver;
+import dataSaver.InMemoryDataSaver;
+import models.ExampleClass1;
+import models.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import static models.MathClass.DoMath;
+import static models.MathClass.pi;
 
 public class Main {
     public static void main(String[] args)
     {
 
-        System.out.println("Hello world!");
+        final int x = 10;
 
-        PizzaMenuItem pizza = new PizzaMenuItem("hawaii", 180);
-        PizzaMenuItem pizza2 = new PizzaMenuItem("hawaii", 180);
-        PizzaMenuItem pizza3 = pizza;
+        ExampleClass1 exampleClass1 = new ExampleClass1();
+        exampleClass1.publicMethod();
+
+                DoMath(1,2);
+
+                        Auto auto = new Auto("sdflkj", "ssdf");
+                auto.GetBrand();
+
+                Box<Auto> boxOfCar = new Box<>(auto);
+
+                Box<Integer> number = new Box<>(16);
+
+                Pair<Integer, Auto> par = new Pair<>(1, auto);
 
 
+        DataSaver<Auto> dataSaver = new InMemoryDataSaver<>();
 
-        if(pizza == pizza3)
+        if (true)
         {
-            System.out.println("je stejna");
+            dataSaver = new FileDataSaver<>();
         }
-        else {
-            System.out.println("neni stejna");
-        }
-
-        pizza3.setName("Pizza");
-        System.out.println(pizza.getName());
+        dataSaver.save(auto);
+        Auto loadedAuto = dataSaver.load();
 
 
-
-        int[] intArr = new int[] {1,2,3,4,5};
-
-
-        PizzaMenuItem[] pizzaArr = new PizzaMenuItem[]{
-                new PizzaMenuItem("jednaPizza", 150),
-                new PizzaMenuItem("druhaPzza",150)
-        };
+        PrintSymbol("h", 10);
 
 
-        List<PizzaMenuItem> pizzaList = new ArrayList<>();
-        pizzaList.add(new PizzaMenuItem("jednaPizza", 150));
-        pizzaList.add((new PizzaMenuItem("druhaPizza",150)));
+    }
 
-        for (PizzaMenuItem pizzaa : pizzaList)
+    private static void PrintSymbol(String symbol, int count)
+    {
+        if(count < 0)
         {
-            System.out.println(pizzaa.toString());
+            return;
         }
 
-        
+        String textToPrint = "";
+        for(int i = 0; i<count; i++)
+        {
+            textToPrint = textToPrint + symbol;
+        }
+        System.out.println(textToPrint);
 
+        count--;
+        PrintSymbol(symbol, count);
     }
 }
